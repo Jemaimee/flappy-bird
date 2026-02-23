@@ -1,0 +1,16 @@
+# Screen
+WIDTH = 1200
+HEIGHT = 800
+FPS = 60
+
+# Player
+BIRD_SPRITE = r"assets\bird.png"
+GRAVITY = 2000
+JUMP_STRENGTH = -900
+MAX_VELOCITY = 2000
+ROTATION_SPEED = 100
+
+# Pipes
+PIPE_SPRITE = r"assets\pipe.png"
+PIPE_SPEED = 100
+PIPE_GAP = 150
