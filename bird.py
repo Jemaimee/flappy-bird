@@ -15,10 +15,6 @@ class Bird(pygame.sprite.Sprite):
         self.velocity = 0
         self.rotation = 0
 
-    def draw(self, screen):
-        pygame.draw.rect(screen, "red", self.rect)
-        screen.blit(self.image, self.rect)
-
     def update(self, dt):
         self.velocity += settings.GRAVITY * dt
         self.rect.y += self.velocity * dt

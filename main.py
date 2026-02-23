@@ -1,6 +1,7 @@
 import pygame
 import settings
 from bird import Bird
+from pipes import Pipe
 
 
 pygame.init()
@@ -9,9 +10,12 @@ clock = pygame.time.Clock()
 running = True
 paused = True
 dt = 0
+last_pipe = 0
+ellapse_time = settings.PIPE_DELAY
 
 birds_group = pygame.sprite.GroupSingle(Bird())
 
+pipes_group = pygame.sprite.Group()
 
 while running:
     for event in pygame.event.get():
@@ -30,8 +34,19 @@ while running:
 
     screen.fill("blue")
 
+    if ellapse_time >= settings.PIPE_DELAY:
+        pipe = Pipe()
+        pipes_group.add(pipe)
+        ellapse_time = 0
+    ellapse_time += dt
+
+    pipes_group.update(dt)
     birds_group.update(dt)
+
+    for pipe in pipes_group:
+        pipe.draw(screen)
     birds_group.draw(screen)
+
     pygame.display.flip()
 
     dt = clock.tick(120) / 1000
