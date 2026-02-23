@@ -74,4 +74,4 @@ while running:
 
     pygame.display.flip()
     print(pipes_group)
-    dt = clock.tick(120) / 1000
+    dt = clock.tick(settings.FPS) / 1000
