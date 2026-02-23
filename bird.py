@@ -14,6 +14,8 @@ class Bird(pygame.sprite.Sprite):
         self.rect.x, self.rect.y = (10, settings.HEIGHT / 2)
         self.velocity = 0
         self.rotation = 0
+        self.mask = pygame.mask.from_surface(self.image)
+        self.mask_image = self.mask.to_surface()
 
     def update(self, dt):
         self.velocity += settings.GRAVITY * dt
@@ -26,6 +28,8 @@ class Bird(pygame.sprite.Sprite):
             )
 
         self.rect = self.image.get_rect(center=self.rect.center)
+        self.mask = pygame.mask.from_surface(self.image)
+        self.mask_image = self.mask.to_surface()
 
     def jump(self, dt):
         self.velocity = settings.JUMP_STRENGTH

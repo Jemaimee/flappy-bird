@@ -20,14 +20,19 @@ pipe = Pipe()
 pipes_group.add(pipe)
 
 
-def check_collision(pipes_group, birds_group):
+def colliding(pipes_group, birds_group):
+    bird_mask = birds_group.sprite.mask
     for pipe in pipes_group:
-        if pygame.Rect.colliderect(
-            birds_group.sprite.rect, pipe.bottom_rect
-        ) or pygame.Rect.colliderect(birds_group.sprite.rect, pipe.top_rect):
-            return False
-        else:
+        if pipe.top_mask.overlap(
+            bird_mask,
+            (
+                birds_group.sprite.rect.left - pipe.top_rect.left,
+                birds_group.sprite.rect.top - pipe.top_rect.top,
+            ),
+        ):
             return True
+        else:
+            return False
 
 
 while running:
@@ -44,12 +49,6 @@ while running:
                 else:
                     paused = True
 
-    if birds_group.sprite.rect.top < 0:
-        birds_group.sprite.rect.top = 0
-        birds_group.sprite.velocity = 0
-    if birds_group.sprite.rect.bottom > settings.HEIGHT:
-        running = False
-
     screen.fill("blue")
     if not paused:
         if ellapse_time >= settings.PIPE_DELAY:
@@ -61,7 +60,13 @@ while running:
         pipes_group.update(dt)
         birds_group.update(dt)
 
-    running = check_collision(pipes_group, birds_group)
+    if colliding(pipes_group, birds_group):
+        paused = True
+    if birds_group.sprite.rect.top < 0:
+        birds_group.sprite.rect.top = 0
+        birds_group.sprite.velocity = 0
+    if birds_group.sprite.rect.bottom > settings.HEIGHT:
+        running = False
 
     for pipe in pipes_group:
         pipe.draw(screen)
