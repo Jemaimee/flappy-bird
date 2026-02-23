@@ -23,8 +23,13 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN:
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_SPACE]:
+            if keys[pygame.K_SPACE] and not paused:
                 birds_group.sprite.jump(dt)
+            if keys[pygame.K_a]:
+                if paused:
+                    paused = False
+                else:
+                    paused = True
 
     if birds_group.sprite.rect.top < 0:
         birds_group.sprite.rect.top = 0
@@ -33,20 +38,20 @@ while running:
         running = False
 
     screen.fill("blue")
+    if not paused:
+        if ellapse_time >= settings.PIPE_DELAY:
+            pipe = Pipe()
+            pipes_group.add(pipe)
+            ellapse_time = 0
+        ellapse_time += dt
 
-    if ellapse_time >= settings.PIPE_DELAY:
-        pipe = Pipe()
-        pipes_group.add(pipe)
-        ellapse_time = 0
-    ellapse_time += dt
-
-    pipes_group.update(dt)
-    birds_group.update(dt)
+        pipes_group.update(dt)
+        birds_group.update(dt)
 
     for pipe in pipes_group:
         pipe.draw(screen)
     birds_group.draw(screen)
 
     pygame.display.flip()
-
+    print(pipes_group)
     dt = clock.tick(120) / 1000
