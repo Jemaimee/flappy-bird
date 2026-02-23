@@ -11,11 +11,24 @@ running = True
 paused = True
 dt = 0
 last_pipe = 0
-ellapse_time = settings.PIPE_DELAY
+ellapse_time = 0
 
 birds_group = pygame.sprite.GroupSingle(Bird())
 
 pipes_group = pygame.sprite.Group()
+pipe = Pipe()
+pipes_group.add(pipe)
+
+
+def check_collision(pipes_group, birds_group):
+    for pipe in pipes_group:
+        if pygame.Rect.colliderect(
+            birds_group.sprite.rect, pipe.bottom_rect
+        ) or pygame.Rect.colliderect(birds_group.sprite.rect, pipe.top_rect):
+            return False
+        else:
+            return True
+
 
 while running:
     for event in pygame.event.get():
@@ -47,6 +60,8 @@ while running:
 
         pipes_group.update(dt)
         birds_group.update(dt)
+
+    running = check_collision(pipes_group, birds_group)
 
     for pipe in pipes_group:
         pipe.draw(screen)
