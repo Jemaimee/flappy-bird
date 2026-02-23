@@ -1,7 +1,7 @@
 # Screen
 WIDTH = 1200
 HEIGHT = 800
-FPS = 60
+FPS = 120
 
 # Player
 BIRD_SPRITE = r"assets\bird.png"
@@ -13,6 +13,6 @@ ROTATION_SPEED = 100
 # Pipes
 TOP_PIPE_SPRITE = r"assets\pipe_top.png"
 BOTTOM_PIPE_SPRITE = r"assets\pipe_bottom.png"
-PIPE_SPEED = 100
+PIPE_SPEED = 200
 PIPE_GAP = 250
 PIPE_DELAY = 5
