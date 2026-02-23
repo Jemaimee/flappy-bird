@@ -29,6 +29,8 @@ class Pipe(pygame.sprite.Sprite):
     def update(self, dt):
         self.top_rect.x -= self.speed * dt
         self.bottom_rect.x -= self.speed * dt
+        if self.top_rect.right < 0:
+            self.kill()
 
     def draw(self, screen):
         screen.blit(self.top_image, self.top_rect)
