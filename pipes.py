@@ -7,7 +7,7 @@ class Pipe(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
-        self.x = settings.WIDTH
+        self.x = settings.WIDTH + 200
         self.speed = settings.PIPE_SPEED
         self.gap_size = settings.PIPE_GAP
         self.top_image = pygame.image.load(settings.TOP_PIPE_SPRITE).convert_alpha()
