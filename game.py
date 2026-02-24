@@ -52,6 +52,7 @@ class Game:
     def display_score(self):
         score_text = self.font.render(f"SCORE : {self.score}", True, "black")
         score_rect = score_text.get_rect(center=(settings.WIDTH // 2, 25))
+        pygame.draw.rect(self.screen, "white", score_rect)
         self.screen.blit(score_text, score_rect)
 
     def update(self, dt):
