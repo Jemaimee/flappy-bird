@@ -12,6 +12,8 @@ paused = True
 dt = 0
 last_pipe = 0
 ellapse_time = 0
+score = 0
+font = pygame.font.Font(r"assets\SpaceMono-Bold.ttf", size=settings.FONT_SIZE)
 
 birds_group = pygame.sprite.GroupSingle(Bird())
 
@@ -33,6 +35,12 @@ def colliding(pipes_group, birds_group):
             return True
         else:
             return False
+
+
+def display_score(screen, score, font):
+    score_text = font.render(f"SCORE : {score}", True, "black")
+    score_rect = score_text.get_rect(center=(settings.WIDTH // 2, 25))
+    screen.blit(score_text, score_rect)
 
 
 while running:
@@ -69,9 +77,15 @@ while running:
         running = False
 
     for pipe in pipes_group:
+        if not pipe.passed and birds_group.sprite.rect.right > pipe.top_rect.right:
+            score += 1
+            pipe.passed = True
+
+    for pipe in pipes_group:
         pipe.draw(screen)
     birds_group.draw(screen)
+    display_score(screen, score, font)
 
     pygame.display.flip()
-    print(pipes_group)
+    print(score)
     dt = clock.tick(settings.FPS) / 1000

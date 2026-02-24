@@ -2,6 +2,7 @@
 WIDTH = 1200
 HEIGHT = 800
 FPS = 120
+FONT_SIZE = 36
 
 # Player
 BIRD_SPRITE = r"assets\bird.png"

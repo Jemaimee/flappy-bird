@@ -10,6 +10,7 @@ class Pipe(pygame.sprite.Sprite):
         self.x = settings.WIDTH + 200
         self.speed = settings.PIPE_SPEED
         self.gap_size = settings.PIPE_GAP
+        self.passed = False
         self.top_image = pygame.image.load(settings.TOP_PIPE_SPRITE).convert_alpha()
         self.top_image = pygame.transform.scale_by(self.top_image, 0.7)
         self.bottom_image = pygame.image.load(
