@@ -33,6 +33,14 @@ def colliding(pipes_group, birds_group):
             ),
         ):
             return True
+        elif pipe.bottom_mask.overlap(
+            bird_mask,
+            (
+                birds_group.sprite.rect.left - pipe.bottom_rect.left,
+                birds_group.sprite.rect.top - pipe.bottom_rect.top,
+            ),
+        ):
+            return True
         else:
             return False
 

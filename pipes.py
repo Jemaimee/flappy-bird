@@ -28,8 +28,6 @@ class Pipe(pygame.sprite.Sprite):
         )
         self.top_mask = pygame.mask.from_surface(self.top_image)
         self.bottom_mask = pygame.mask.from_surface(self.bottom_image)
-        self.top_mask_image = self.top_mask.to_surface()
-        self.bottom_mask_image = self.bottom_mask.to_surface()
 
     def update(self, dt):
         self.top_rect.x -= self.speed * dt
