@@ -31,6 +31,6 @@ class Bird(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.mask_image = self.mask.to_surface()
 
-    def jump(self, dt):
+    def jump(self):
         self.velocity = settings.JUMP_STRENGTH
         self.rotation = 45
